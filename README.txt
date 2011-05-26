@@ -1,1 +1,2 @@
-This is a highly advanced project
+This is a highly advanced project.
+I'll tell you more about it later...
