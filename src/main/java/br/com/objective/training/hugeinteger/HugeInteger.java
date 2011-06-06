@@ -2,8 +2,17 @@ package br.com.objective.training.hugeinteger;
 
 public interface HugeInteger {
 
-	public abstract HugeInteger add(HugeInteger other);
+	/**
+	 *	other < this --> -1
+	 *	other = this -->  0
+	 *	other > this --> +1
+	 */
+	public abstract int compareTo(HugeInteger value);
 
-	public abstract HugeInteger subtract(HugeInteger other);
+	public abstract HugeInteger add(HugeInteger value);
+
+	public abstract HugeInteger subtract(HugeInteger value);
+
+	public abstract HugeInteger negate();
 
 }
