@@ -4,10 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>objective.training</groupId>
 	<artifactId>huge-integer-calc</artifactId>
-	<name>JEE Course</name>
+	<packaging>pom</packaging>
+	<name>Huge Integer Calculator</name>
 	<version>1.0.0-SNAPSHOT</version>
 
-	<description>Course given at Objective Maringa in the first semester of 2011. It covers the basics of distributed computing with Java.</description>
+	<description>A calculator that works with numbers that don't fit in a long</description>
 	<scm>
 		<url>https://github.com/igorarouca/jeecourse</url>
 	</scm>
@@ -24,5 +25,11 @@
 			<version>4.8.1</version>
 		</dependency>
 	</dependencies>
+	<modules>
+		<module>huge-integer-calc-client</module>
+		<module>huge-integer-calc-core</module>
+		<module>huge-integer-calc-server</module>
+		<module>huge-integer-calc-spikes</module>
+	</modules>
 
 </project>
