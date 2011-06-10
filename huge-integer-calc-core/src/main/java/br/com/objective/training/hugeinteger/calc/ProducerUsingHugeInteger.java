@@ -7,6 +7,14 @@ import br.com.objective.training.hugeinteger.HugeIntegerFactory;
 
 class ProducerUsingHugeInteger implements Producer<Calculator<String>> {
 
+	private static final ProducerUsingHugeInteger instance = new ProducerUsingHugeInteger();
+
+	private ProducerUsingHugeInteger() {};
+
+	static ProducerUsingHugeInteger getInstance() {
+		return instance;
+	}
+
 	@Override
 	public Calculator<String> produce() {
 		return new CalculatorImpl<HugeInteger>(

@@ -4,7 +4,7 @@ import br.com.objective.training.foundation.Producer;
 
 public class CalculatorFactory {
 
-	private static final Producer<Calculator<String>> DEFAULT_PRODUCER = new ProducerUsingHugeInteger();
+	private static final Producer<Calculator<String>> DEFAULT_PRODUCER = ProducerUsingHugeInteger.getInstance();
 
 	private static CalculatorFactory instance;
 

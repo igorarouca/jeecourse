@@ -6,7 +6,15 @@ import br.com.objective.training.foundation.Functor;
 import br.com.objective.training.foundation.Producer;
 import br.com.objective.training.hugeinteger.UnaryOperations;
 
-class ProducerUsingBigInteger implements Producer<Calculator<String>> {
+public class ProducerUsingBigInteger implements Producer<Calculator<String>> {
+
+	private static final ProducerUsingBigInteger instance = new ProducerUsingBigInteger();
+
+	private ProducerUsingBigInteger() {}
+
+	public static ProducerUsingBigInteger getInstance() {
+		return instance;
+	}
 
 	@Override
 	public Calculator<String> produce() {
@@ -17,7 +25,7 @@ class ProducerUsingBigInteger implements Producer<Calculator<String>> {
 		);
 	}
 
-	private class BigIntegerAdapter extends BigInteger implements UnaryOperations<BigInteger> {
+	private static class BigIntegerAdapter extends BigInteger implements UnaryOperations<BigInteger> {
 
 		private static final long serialVersionUID = 1346997383310648995L;
 

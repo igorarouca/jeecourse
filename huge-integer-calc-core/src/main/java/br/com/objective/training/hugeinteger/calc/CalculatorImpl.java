@@ -12,7 +12,7 @@ class CalculatorImpl<T extends UnaryOperations<? super T>> implements Calculator
 	}
 
 	@Override
-	public int compareTo(String left, String right) {
+	public int compare(String left, String right) {
 		return parse(left).compareTo(parse(right));
 	}
 

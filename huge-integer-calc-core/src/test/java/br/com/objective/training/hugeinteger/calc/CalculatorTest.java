@@ -1,5 +1,6 @@
 package br.com.objective.training.hugeinteger.calc;
 
+import static br.com.objective.training.hugeinteger.fixtures.Constants.TOO_LARGE_FOR_LONG;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.BeforeClass;
@@ -7,18 +8,19 @@ import org.junit.Test;
 
 public class CalculatorTest {
 
-	private static final String TOO_LARGE_FOR_LONG = "9223372036854775808";
-
 	private static Calculator<String> calc;
 
 	@BeforeClass
 	public static void configureCalculator() {
 		// If you wanna change the calculator implementation, here's the place to do it.
-		calc = CalculatorFactory.load().newCalculator(); // I'll go with default version
+		calc = CalculatorFactory.load().newCalculator(); // I'm gonna go with the default version
+
+		// Wanna test using java.math.BigInteger? There's already a producer to make your life easier
+		// calc = CalculatorFactory.load(ProducerUsingBigInteger.getInstance()).newCalculator();
 	}
 
 	@Test
-	public void compare() {
+	public void compareSmallNumbers() {
 		assertEquals(-1, compare("1", "2"));
 		assertEquals( 1, compare("2", "1"));
 		assertEquals( 0, compare("1", "1"));
@@ -38,7 +40,7 @@ public class CalculatorTest {
 	}
 
 	private int compare(String left, String right) {
-		return calc.compareTo(left, right);
+		return calc.compare(left, right);
 	}
 
 	@Test
@@ -85,6 +87,28 @@ public class CalculatorTest {
 			result = calc.subtract(result, operands[i]);
 
 		return result;
+	}
+
+	@Test
+	public void stress() {
+		String oneMillionTimesTooLargeForLong = multiply(TOO_LARGE_FOR_LONG, 1000000);
+		String twoMillionTimesTooLargeForLong = multiply(oneMillionTimesTooLargeForLong, 2);
+
+		int zero =
+			compare(
+				subtract(twoMillionTimesTooLargeForLong, oneMillionTimesTooLargeForLong),
+				oneMillionTimesTooLargeForLong
+			);
+
+		assertEquals(0, zero);
+	}
+
+	private String multiply(String number, int by) {
+		String result = number;
+		for (int i = 1; i < by; ++i)
+			result = calc.add(result, number);
+		return result;
+			
 	}
 
 	private String negate(String value) {
