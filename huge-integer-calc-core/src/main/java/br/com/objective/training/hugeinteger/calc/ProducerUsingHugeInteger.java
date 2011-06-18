@@ -5,13 +5,13 @@ import br.com.objective.training.foundation.Producer;
 import br.com.objective.training.hugeinteger.HugeInteger;
 import br.com.objective.training.hugeinteger.HugeIntegerFactory;
 
-class ProducerUsingHugeInteger implements Producer<Calculator<String>> {
+public class ProducerUsingHugeInteger implements Producer<Calculator<String>> {
 
 	private static final ProducerUsingHugeInteger instance = new ProducerUsingHugeInteger();
 
-	private ProducerUsingHugeInteger() {};
+	private ProducerUsingHugeInteger() {}
 
-	static ProducerUsingHugeInteger getInstance() {
+	public static ProducerUsingHugeInteger getInstance() {
 		return instance;
 	}
 

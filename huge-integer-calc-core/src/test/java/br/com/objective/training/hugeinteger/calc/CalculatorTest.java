@@ -13,10 +13,10 @@ public class CalculatorTest {
 	@BeforeClass
 	public static void configureCalculator() {
 		// If you wanna change the calculator implementation, here's the place to do it.
-		calc = CalculatorFactory.load().newCalculator(); // I'm gonna go with the default version
+		calc = CalculatorFactory.load(ProducerUsingHugeInteger.getInstance()).newCalculator(); // I'm gonna go with the default version
 
 		// Wanna test using java.math.BigInteger? There's already a producer to make your life easier
-		// calc = CalculatorFactory.load(ProducerUsingBigInteger.getInstance()).newCalculator();
+		// calc = CalculatorFactory.load(ProducerUsingBigInteger.getInstance()).getCalculator();
 	}
 
 	@Test
