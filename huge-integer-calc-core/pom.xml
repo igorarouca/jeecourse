@@ -13,5 +13,12 @@
 	<version>1.0.0-SNAPSHOT</version>
 	<name>Huge Integer Calculator Core</name>
 	<description>Contains the business tier with the classes that implement the calculator.</description>
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 
 </project>

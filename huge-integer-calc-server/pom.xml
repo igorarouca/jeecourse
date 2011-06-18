@@ -9,4 +9,11 @@
   <artifactId>huge-integer-calc-server</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <name>Huge Integer Calculator Server</name>
+  <dependencies>
+  	<dependency>
+  		<groupId>junit</groupId>
+  		<artifactId>junit</artifactId>
+  		<scope>test</scope>
+  	</dependency>
+  </dependencies>
 </project>

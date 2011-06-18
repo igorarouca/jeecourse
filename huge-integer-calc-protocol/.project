@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>huge-integer-calc-client</name>
-	<comment>A calculator that works with numbers that don&apos;t fit in a long. NO_M2ECLIPSE_SUPPORT: Project files created with the maven-eclipse-plugin are not supported in M2Eclipse.</comment>
+	<name>huge-integer-calc-protocol</name>
+	<comment></comment>
 	<projects>
-		<project>huge-integer-calc-core</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
@@ -18,7 +17,7 @@
 		</buildCommand>
 	</buildSpec>
 	<natures>
-		<nature>org.maven.ide.eclipse.maven2Nature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
+		<nature>org.maven.ide.eclipse.maven2Nature</nature>
 	</natures>
 </projectDescription>
