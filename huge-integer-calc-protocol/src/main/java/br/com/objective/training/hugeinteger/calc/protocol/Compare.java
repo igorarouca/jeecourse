@@ -1,6 +1,6 @@
 package br.com.objective.training.hugeinteger.calc.protocol;
 
-public class Compare extends BinaryOperation {
+public class Compare extends Operation {
 
 	private static final long serialVersionUID = 8106485309082547603L;
 
@@ -10,6 +10,11 @@ public class Compare extends BinaryOperation {
 
 	public Compare(String leftOperand, String rightOperand) {
 		super(leftOperand, rightOperand);
+	}
+	
+	@Override
+	public String toString() {
+		return "compare" + super.toString();
 	}
 
 }
