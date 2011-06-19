@@ -5,25 +5,22 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.net.InetAddress;
-import java.net.InetSocketAddress;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class CalculatorServiceTest {
 
-	private static InetSocketAddress DEFAULT_ADDRESS;
-	private static CalculatorService service;
+	private static Service service;
 
 	@BeforeClass
 	public static void serviceAddress() throws IOException {
-		DEFAULT_ADDRESS = new InetSocketAddress(InetAddress.getLocalHost(), 9876);
-		service = CalculatorService.load(calculatorFactory());
+		service = CalculatorServiceWrapper.wrap(calculatorFactory().newCalculator());
 	}
 
 	@Test
 	public void startAndStop() throws IOException {
-		service.startOn(DEFAULT_ADDRESS);
+		service.startOn(InetAddress.getLocalHost(), 9876);
 		assertTrue(service.isAlive());
 		service.stop();
 		assertFalse(service.isAlive());
