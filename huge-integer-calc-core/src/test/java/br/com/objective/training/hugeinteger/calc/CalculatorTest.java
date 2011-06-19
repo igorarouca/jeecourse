@@ -20,26 +20,26 @@ public class CalculatorTest {
 	}
 
 	@Test
-	public void compareSmallNumbers() {
-		assertEquals(-1, compare("1", "2"));
-		assertEquals( 1, compare("2", "1"));
-		assertEquals( 0, compare("1", "1"));
-		assertEquals( 0, compare("0", "0"));
-		assertEquals( 1, compare("1", "0"));
-		assertEquals(-1, compare("0", "1"));
-		assertEquals(-1, compare("-1", "1"));
-		assertEquals( 1, compare("1", "-1"));
-		assertEquals( 1, compare("-3", "-4"));
-		assertEquals(-1, compare("-4", "-3"));
-		assertEquals( 0, compare(TOO_LARGE_FOR_LONG, TOO_LARGE_FOR_LONG));
-		assertEquals( 1, compare(TOO_LARGE_FOR_LONG + 1, TOO_LARGE_FOR_LONG));
-		assertEquals(-1, compare(TOO_LARGE_FOR_LONG, 1 + TOO_LARGE_FOR_LONG));
-		assertEquals( 1, compare(TOO_LARGE_FOR_LONG, negate(TOO_LARGE_FOR_LONG)));
-		assertEquals(-1, compare(negate(TOO_LARGE_FOR_LONG), TOO_LARGE_FOR_LONG));
-		assertEquals( 0, compare(negate(TOO_LARGE_FOR_LONG), negate(TOO_LARGE_FOR_LONG)));
+	public void compare() {
+		assertEquals("-1", compare("1", "2"));
+		assertEquals("1", compare("2", "1"));
+		assertEquals("0", compare("1", "1"));
+		assertEquals("0", compare("0", "0"));
+		assertEquals("1", compare("1", "0"));
+		assertEquals("-1", compare("0", "1"));
+		assertEquals("-1", compare("-1", "1"));
+		assertEquals("1", compare("1", "-1"));
+		assertEquals("1", compare("-3", "-4"));
+		assertEquals("-1", compare("-4", "-3"));
+		assertEquals("0", compare(TOO_LARGE_FOR_LONG, TOO_LARGE_FOR_LONG));
+		assertEquals("1", compare(TOO_LARGE_FOR_LONG + 1, TOO_LARGE_FOR_LONG));
+		assertEquals("-1", compare(TOO_LARGE_FOR_LONG, 1 + TOO_LARGE_FOR_LONG));
+		assertEquals("1", compare(TOO_LARGE_FOR_LONG, negate(TOO_LARGE_FOR_LONG)));
+		assertEquals("-1", compare(negate(TOO_LARGE_FOR_LONG), TOO_LARGE_FOR_LONG));
+		assertEquals("0", compare(negate(TOO_LARGE_FOR_LONG), negate(TOO_LARGE_FOR_LONG)));
 	}
 
-	private int compare(String left, String right) {
+	private String compare(String left, String right) {
 		return calc.compare(left, right);
 	}
 
@@ -94,13 +94,13 @@ public class CalculatorTest {
 		String oneMillionTimesTooLargeForLong = multiply(TOO_LARGE_FOR_LONG, 1000000);
 		String twoMillionTimesTooLargeForLong = multiply(oneMillionTimesTooLargeForLong, 2);
 
-		int zero =
+		String zero =
 			compare(
 				subtract(twoMillionTimesTooLargeForLong, oneMillionTimesTooLargeForLong),
 				oneMillionTimesTooLargeForLong
 			);
 
-		assertEquals(0, zero);
+		assertEquals("0", zero);
 	}
 
 	private String multiply(String number, int by) {

@@ -12,8 +12,8 @@ class CalculatorImpl<T extends UnaryOperations<? super T>> implements Calculator
 	}
 
 	@Override
-	public int compare(String left, String right) {
-		return parse(left).compareTo(parse(right));
+	public String compare(String left, String right) {
+		return String.valueOf(parse(left).compareTo(parse(right)));
 	}
 
 	@Override
