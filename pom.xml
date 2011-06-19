@@ -51,6 +51,13 @@
 				<scope>test</scope>
 			</dependency>
 
+			<dependency>
+				<groupId>objective.training</groupId>
+				<artifactId>huge-integer-calc-protocol</artifactId>
+				<version>${project.version}</version>
+				<type>jar</type>
+				<scope>compile</scope>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
