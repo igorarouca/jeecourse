@@ -23,6 +23,12 @@
   		<groupId>objective.training</groupId>
   		<artifactId>huge-integer-calc-core</artifactId>
   	</dependency>
+  	<dependency>
+  		<groupId>objective.training</groupId>
+  		<artifactId>huge-integer-calc-protocol</artifactId>
+  		<type>jar</type>
+  		<scope>compile</scope>
+  	</dependency>
   </dependencies>
 
 </project>
