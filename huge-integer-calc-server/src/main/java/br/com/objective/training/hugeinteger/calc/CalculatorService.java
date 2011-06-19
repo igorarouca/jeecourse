@@ -44,7 +44,7 @@ class CalculatorService implements Service, Runnable {
 			startListening();
 
 		} catch (IOException ioe) {
-			threadPool.shutdown(); 
+			stop(); 
 		}
 	}
 
