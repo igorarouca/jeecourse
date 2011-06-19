@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.net.SocketException;
 
 import br.com.objective.training.foundation.IOUtils;
 import br.com.objective.training.hugeinteger.calc.protocol.Add;
@@ -37,7 +38,9 @@ class CalculatorServant implements Runnable, Closeable {
 				processRequest((Operation) inputStream.readObject());
 			}
 
-		} catch(Exception e) { 
+		} catch(SocketException se) {
+			System.out.println(">>> Calculator Servant closed.");
+		} catch(Exception e) {
 			throw new RuntimeException(e);
 		} finally {
 			IOUtils.closeSilently(this);
@@ -47,11 +50,11 @@ class CalculatorServant implements Runnable, Closeable {
 	private void processRequest(Operation operation) {
 		System.out.println("Incoming request: " + operation);
 		if (operation instanceof Add) {
-			respondWith(delegate.add(operation.getLeftOperand(), operation.getLeftOperand()));
+			respondWith(delegate.add(operation.getLeftOperand(), operation.getRightOperand()));
 		} else if (operation instanceof Subtract) {
-			respondWith(delegate.subtract(operation.getLeftOperand(), operation.getLeftOperand()));
+			respondWith(delegate.subtract(operation.getLeftOperand(), operation.getRightOperand()));
 		} else if (operation instanceof Compare) {
-			respondWith(delegate.compare(operation.getLeftOperand(), operation.getLeftOperand()));
+			respondWith(delegate.compare(operation.getLeftOperand(), operation.getRightOperand()));
 		} else {
 			respondWith("Invalid Operation");
 		}
@@ -61,6 +64,8 @@ class CalculatorServant implements Runnable, Closeable {
 		System.out.println("Sending result: " + result);
 		try {
 			outputStream.writeObject(result);
+			outputStream.flush();
+
 		} catch (IOException e) {
 			e.printStackTrace(System.err);
 		}
