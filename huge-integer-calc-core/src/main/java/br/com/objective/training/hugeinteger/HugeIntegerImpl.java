@@ -118,10 +118,13 @@ class HugeIntegerImpl implements HugeInteger, ReadOnly {
 		int compare = compareMagnitude(other.magnitude);
 		if (compare == 0) return ZERO;
 
-		if (compare > 0)
-			return new HugeIntegerImpl(this.sign, subtract(this.magnitude, other.magnitude));
-		else
-			return new HugeIntegerImpl(other.sign, subtract(other.magnitude, this.magnitude));
+		int resultSign = this.sign * compare;
+		int[] resultMagnitude =
+			(compare > 0)
+				? subtract(this.magnitude, other.magnitude)
+				: subtract(other.magnitude, this.magnitude);
+
+		return new HugeIntegerImpl(resultSign, resultMagnitude);
 	}
 
 	private static int[] add(int[] a, int[] b) {
@@ -162,10 +165,13 @@ class HugeIntegerImpl implements HugeInteger, ReadOnly {
         int compare = compareMagnitude(other.magnitude);
         if (compare == 0) return ZERO;
 
-        if (compare > 0)
-        	return new HugeIntegerImpl(this.sign, subtract(this.magnitude, other.magnitude));
-        else
-        	return new HugeIntegerImpl(other.sign, subtract(other.magnitude, this.magnitude));
+        int resultSign = compare * this.sign;
+		int[] resultMagnitude =
+			(compare > 0)
+				? subtract(this.magnitude, other.magnitude)
+				: subtract(other.magnitude, this.magnitude);
+
+		return new HugeIntegerImpl(resultSign, resultMagnitude);
 	}
 
 	@Override

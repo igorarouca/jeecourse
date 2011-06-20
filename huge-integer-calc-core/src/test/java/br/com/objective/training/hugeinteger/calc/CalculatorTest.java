@@ -72,6 +72,7 @@ public class CalculatorTest {
 
 	@Test
 	public void subtract() {
+		assertEquals("-1",	 subtract("1", "2"));
 		assertEquals("1",	 subtract("120", "119"));
 		assertEquals("119",  subtract("120", "1"));
 		assertEquals("-119", subtract("-120", "-1"));
