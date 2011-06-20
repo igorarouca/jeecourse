@@ -13,9 +13,9 @@ import br.com.objective.training.hugeinteger.calc.protocol.Operation;
 import br.com.objective.training.hugeinteger.calc.protocol.Compare;
 import br.com.objective.training.hugeinteger.calc.protocol.Subtract;
 
-class CalculatorServant implements Runnable, Closeable {
+class CalculatorSkeleton implements Runnable, Closeable {
 
-	private final Calculator<String> delegate;
+	private final Calculator<String> servant;
 
 	private final Socket socket;
 	private ObjectInputStream inputStream;
@@ -23,8 +23,8 @@ class CalculatorServant implements Runnable, Closeable {
 
 	private boolean isAlive;
 
-	CalculatorServant(final Calculator<String> delegate, final Socket socket) throws IOException {
-		this.delegate = delegate;
+	CalculatorSkeleton(final Calculator<String> delegate, final Socket socket) throws IOException {
+		this.servant = delegate;
 		this.socket = socket;
 		this.inputStream = new ObjectInputStream(socket.getInputStream());
 		this.outputStream = new ObjectOutputStream(socket.getOutputStream());
@@ -39,7 +39,7 @@ class CalculatorServant implements Runnable, Closeable {
 			}
 
 		} catch(SocketException se) {
-			System.out.println(">>> Calculator Servant closed.");
+			System.out.println(">>> Calculator Skeleton closed.");
 		} catch(Exception e) {
 			throw new RuntimeException(e);
 		} finally {
@@ -47,20 +47,28 @@ class CalculatorServant implements Runnable, Closeable {
 		}
 	}
 
-	private void processRequest(Operation operation) {
-		System.out.println("Incoming request: " + operation);
-		if (operation instanceof Add) {
-			respondWith(delegate.add(operation.getLeftOperand(), operation.getRightOperand()));
-		} else if (operation instanceof Subtract) {
-			respondWith(delegate.subtract(operation.getLeftOperand(), operation.getRightOperand()));
-		} else if (operation instanceof Compare) {
-			respondWith(delegate.compare(operation.getLeftOperand(), operation.getRightOperand()));
-		} else {
-			respondWith("Invalid Operation");
-		}
+	@Override
+	public void close() throws IOException {
+		this.socket.close();
 	}
 
-	private void respondWith(String result) {
+	private void processRequest(Operation operation) {
+		System.out.println("Incoming request: " + operation);
+		String result = "Invalid Operation";
+
+		if (operation instanceof Add)
+			result = servant.add(operation.getLeftOperand(), operation.getRightOperand());
+
+		if (operation instanceof Subtract)
+			result = servant.subtract(operation.getLeftOperand(), operation.getRightOperand());
+
+		if (operation instanceof Compare)
+			result = servant.compare(operation.getLeftOperand(), operation.getRightOperand());
+
+		sendResponse(result);
+	}
+
+	private void sendResponse(String result) {
 		System.out.println("Sending result: " + result);
 		try {
 			outputStream.writeObject(result);
@@ -71,10 +79,8 @@ class CalculatorServant implements Runnable, Closeable {
 		}
 	}
 
-	@Override
-	public void close() throws IOException {
+	public void kill() {
 		this.isAlive = false;
-		this.socket.close();
 	}
 
 }
