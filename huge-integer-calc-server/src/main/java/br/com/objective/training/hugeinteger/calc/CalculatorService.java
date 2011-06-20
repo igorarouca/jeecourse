@@ -10,8 +10,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import br.com.objective.training.foundation.IOUtils;
-
 class CalculatorService implements Service, Runnable {
 
 	private static final int SECONDS_TO_STOP = 10;
@@ -23,13 +21,13 @@ class CalculatorService implements Service, Runnable {
 
 	private ServerSocket serverSocket;
 
-	private List<CalculatorServant> servants;
+	private List<CalculatorSkeleton> skeletons;
 
 	CalculatorService(Calculator<String> component, int capacity) throws IOException {
 		this.component = component;
 		this.capacity = capacity;
 		this.threadPool = Executors.newFixedThreadPool(capacity + 1);
-		this.servants = new ArrayList<CalculatorServant>();
+		this.skeletons = new ArrayList<CalculatorSkeleton>();
 	}
 
 	@Override
@@ -43,21 +41,21 @@ class CalculatorService implements Service, Runnable {
 		try {
 			startListening();
 
-		} catch (IOException ioe) {
+		} catch (Exception e) {
 			stop(); 
 		}
 	}
 
 	private void startListening() throws IOException {
-		while(true) {
-			Runnable servant = createServant(component, serverSocket.accept());
-			if (servant != null) threadPool.execute(servant);
-		}
+		while(true)
+			threadPool.execute(
+				createSkeleton(component, serverSocket.accept())
+			);
 	}
 
 	@Override
 	public void stop() {
-		closeServants();
+		killSkeletons();
 		threadPool.shutdown();
 		try {
 			if (!threadPool.awaitTermination(SECONDS_TO_STOP, TimeUnit.SECONDS)) {
@@ -72,8 +70,8 @@ class CalculatorService implements Service, Runnable {
 	   }
 	}
 
-	private void closeServants() {
-		for (CalculatorServant servant : servants) IOUtils.closeSilently(servant);
+	private void killSkeletons() {
+		for (CalculatorSkeleton skeleton : skeletons) skeleton.kill();
 	}
 
 	@Override
@@ -81,16 +79,14 @@ class CalculatorService implements Service, Runnable {
 		return !threadPool.isTerminated();
 	}
 
-	private Runnable createServant(final Calculator<String> calculator, final Socket socket) {
+	private Runnable createSkeleton(final Calculator<String> calculator, final Socket socket) {
 		try {
-			CalculatorServant servant = new CalculatorServant(calculator, socket);
-			servants.add(servant);
-			return servant;
+			CalculatorSkeleton skeleton = new CalculatorSkeleton(calculator, socket);
+			skeletons.add(skeleton);
+			return skeleton;
 
 		} catch (IOException ioe) {
-			System.err.println(">>> Calculator servant terminated unexpectedly!");
-			ioe.printStackTrace(System.err);
-			return null;
+			throw new RuntimeException(">>> Calculator skeleton terminated unexpectedly!", ioe);
 		}
 	}
 

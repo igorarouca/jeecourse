@@ -5,6 +5,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.net.SocketException;
 
 import br.com.objective.training.hugeinteger.calc.protocol.Add;
 import br.com.objective.training.hugeinteger.calc.protocol.Compare;
@@ -51,6 +52,8 @@ class CalculatorStub implements Calculator<String> {
 			outputStream.flush();
 			result = inputStream.readObject().toString();
 
+		} catch(SocketException so) {
+			System.err.println(">>> Calculator servant terminated unexpectedly!");
 		} catch (Exception e) {
 			e.printStackTrace(System.err);
 			throw new RuntimeException("Error computing operation");
