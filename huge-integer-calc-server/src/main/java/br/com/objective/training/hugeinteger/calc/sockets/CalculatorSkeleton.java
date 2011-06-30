@@ -1,4 +1,4 @@
-package br.com.objective.training.hugeinteger.calc;
+package br.com.objective.training.hugeinteger.calc.sockets;
 
 import java.io.Closeable;
 import java.io.IOException;
@@ -8,6 +8,7 @@ import java.net.Socket;
 import java.net.SocketException;
 
 import br.com.objective.training.foundation.IOUtils;
+import br.com.objective.training.hugeinteger.calc.Calculator;
 import br.com.objective.training.hugeinteger.calc.protocol.Add;
 import br.com.objective.training.hugeinteger.calc.protocol.Operation;
 import br.com.objective.training.hugeinteger.calc.protocol.Compare;

@@ -7,12 +7,13 @@ import java.util.Scanner;
 public class CalculatorConsole {
 
 	public static void main(String[] args) throws UnknownHostException, IOException, ClassNotFoundException {
+		Calculator<String> calculator = CalculatorFactory.DEFAULT.newCalculator();
+
 		Scanner in = new Scanner(System.in);
 		String[] input;
 		String left;
 		String operator;
 		String right;
-		Calculator<String> calculator = CalculatorFactory.load(ProducerUsingHugeInteger.getInstance()).newCalculator();
 
 		while (true) {
 			input = in.nextLine().split(" ");

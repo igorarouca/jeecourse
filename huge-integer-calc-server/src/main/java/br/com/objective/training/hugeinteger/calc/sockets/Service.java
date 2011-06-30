@@ -1,4 +1,4 @@
-package br.com.objective.training.hugeinteger.calc;
+package br.com.objective.training.hugeinteger.calc.sockets;
 
 import java.io.IOException;
 import java.net.InetAddress;

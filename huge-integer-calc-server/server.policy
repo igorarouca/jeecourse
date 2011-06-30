@@ -1,0 +1,3 @@
+grant codeBase "file:/c:/desenvolvimento/Training/huge-integer-calc/huge-integer-calc-server/src/main/java" {
+    permission java.security.AllPermission;
+};

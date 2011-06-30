@@ -113,7 +113,6 @@ public class CalculatorGUI {
 	}
 
 	public static void main(String[] args) {
-		Calculator<String> calculatorFactory = CalculatorFactory.load(ProducerUsingHugeInteger.getInstance()).newCalculator();
-		new CalculatorGUI(calculatorFactory); 
+		new CalculatorGUI(RemoteCalculatorFactory.instance().newCalculator()); 
 	}
 }

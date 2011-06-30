@@ -1,4 +1,4 @@
-package br.com.objective.training.hugeinteger.calc;
+package br.com.objective.training.hugeinteger.calc.sockets;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+
+import br.com.objective.training.hugeinteger.calc.Calculator;
 
 class CalculatorService implements Service, Runnable {
 

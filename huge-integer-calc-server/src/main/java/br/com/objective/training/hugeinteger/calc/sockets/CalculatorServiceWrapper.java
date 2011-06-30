@@ -1,6 +1,8 @@
-package br.com.objective.training.hugeinteger.calc;
+package br.com.objective.training.hugeinteger.calc.sockets;
 
 import java.io.IOException;
+
+import br.com.objective.training.hugeinteger.calc.Calculator;
 
 public class CalculatorServiceWrapper {
 
