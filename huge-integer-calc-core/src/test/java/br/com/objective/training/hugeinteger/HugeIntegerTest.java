@@ -1,7 +1,7 @@
 package br.com.objective.training.hugeinteger;
 
 import static org.junit.Assert.assertEquals;
-import static br.com.objective.training.hugeinteger.fixtures.Constants.TOO_LARGE_FOR_LONG;
+import static br.com.objective.training.fixtures.Constants.TOO_LARGE_FOR_LONG;
 
 import org.junit.Test;
 

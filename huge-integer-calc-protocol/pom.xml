@@ -17,5 +17,11 @@
   		<type>jar</type>
   		<scope>compile</scope>
   	</dependency>
+  	<dependency>
+  		<groupId>objective.training</groupId>
+  		<artifactId>huge-integer-calc-interfaces</artifactId>
+  		<type>jar</type>
+  		<scope>compile</scope>
+  	</dependency>
   </dependencies>
 </project>

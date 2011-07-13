@@ -1,6 +1,6 @@
 package br.com.objective.training.hugeinteger;
 
-public class HugeIntegerFactory {
+public abstract class HugeIntegerFactory {
 
 	private HugeIntegerFactory() {};
 

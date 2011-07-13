@@ -32,7 +32,8 @@
 		</plugins>
 	</build>
 
-	<dependencies />
+	<dependencies >
+	</dependencies>
 
 	<dependencyManagement>
 		<dependencies>
@@ -58,6 +59,20 @@
 				<type>jar</type>
 				<scope>compile</scope>
 			</dependency>
+			<dependency>
+				<groupId>objective.training</groupId>
+				<artifactId>huge-integer-calc-interfaces</artifactId>
+				<version>${project.version}</version>
+				<type>jar</type>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>objective.training</groupId>
+				<artifactId>huge-integer-calc-commons</artifactId>
+				<version>${project.version}</version>
+				<type>jar</type>
+				<scope>compile</scope>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -67,6 +82,8 @@
 		<module>huge-integer-calc-server</module>
 		<module>huge-integer-calc-spikes</module>
 		<module>huge-integer-calc-protocol</module>
+		<module>huge-integer-calc-interfaces</module>
+		<module>huge-integer-calc-commons</module>
 	</modules>
 
 	
